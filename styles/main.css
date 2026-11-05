@@ -44,6 +44,38 @@ html, body {
   right: -50%;
 }
 
+/* Разноцветные шарики */
+.balloon {
+  position: absolute;
+  top: -50%;
+  border-radius: 50% 50% 50% 50% / 45% 45% 55% 55%;
+  box-shadow: inset -6px -8px 0 rgba(0, 0, 0, 0.08);
+}
+
+/* Блик на шарике */
+.balloon:before {
+  position: absolute;
+  content: "";
+  top: 15%;
+  left: 20%;
+  width: 22%;
+  height: 22%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+/* Узелок внизу шарика */
+.balloon:after {
+  position: absolute;
+  content: "";
+  left: 50%;
+  bottom: -7px;
+  transform: translateX(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 8px solid currentColor;
+}
+
 @keyframes love {
   0% {
       top: 110%;
