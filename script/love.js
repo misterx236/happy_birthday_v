@@ -103,7 +103,7 @@ function init() {
     for (var k = 0; k < 14; k++) {
       sprinkles.push({
         x: (Math.random() - 0.5) * top.w * 0.8,
-        y: top.target + 6 * s + Math.random() * 18 * s,
+        dy: 6 * s + Math.random() * 18 * s,
         color: ["#ff4d6d", "#ffd93d", "#4d96ff", "#6bcb77", "#c77dff"][k % 5],
         angle: Math.random() * Math.PI
       });
@@ -180,7 +180,7 @@ function init() {
     for (var i = 0; i < sprinkles.length; i++) {
       var sp = sprinkles[i];
       ctx.save();
-      ctx.translate(top.cx + sp.x, sp.y);
+      ctx.translate(top.cx + sp.x, top.y + sp.dy);
       ctx.rotate(sp.angle);
       ctx.fillStyle = sp.color;
       ctx.fillRect(-4 * s, -1.5 * s, 8 * s, 3 * s);
@@ -280,7 +280,8 @@ function init() {
     for (var j = 0; j < pieces.length; j++) {
       if (t >= pieces[j].delay) drawLayer(pieces[j]);
     }
-    drawSprinkles(pieces[pieces.length - 1]);
+    var topPiece = pieces[pieces.length - 1];
+    if (t >= topPiece.delay) drawSprinkles(topPiece);
 
     for (var k = 0; k < candles.length; k++) {
       drawCandle(candles[k], k);
