@@ -217,9 +217,10 @@ function init() {
 
   // Надпись внизу, появляется после зажигания всех свечей
   function drawText() {
-    var lastLit = candles[candles.length - 1].landedAt + 0.3;
-    if (!candles[candles.length - 1].landed || t < lastLit + 0.5) return;
-    var alpha = Math.min(1, (t - lastLit - 0.5) / 1.5);
+    // Текст появляется, когда начинают падать свечи
+    var start = candles[0].delay;
+    if (t < start) return;
+    var alpha = Math.min(1, (t - start) / 1.5);
 
     ctx.save();
     ctx.globalAlpha = alpha;
