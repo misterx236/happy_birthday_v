@@ -14,7 +14,6 @@ function init() {
   var W, H, s;          // ширина, высота, масштаб элементов
   var pieces = [];      // коржи
   var candles = [];     // свечи
-  var sprinkles = [];   // посыпка на верхнем коржике
   var startTime = 0;
   var lastFrame = 0;
   var t = 0;            // время анимации в секундах
@@ -98,17 +97,6 @@ function init() {
       });
     }
 
-    // Посыпка на верхнем коржике (фиксированные точки)
-    sprinkles = [];
-    for (var k = 0; k < 14; k++) {
-      sprinkles.push({
-        x: (Math.random() - 0.5) * top.w * 0.8,
-        dy: 6 * s + Math.random() * 18 * s,
-        color: ["#ff4d6d", "#ffd93d", "#4d96ff", "#6bcb77", "#c77dff"][k % 5],
-        angle: Math.random() * Math.PI
-      });
-    }
-
     textFont = Math.round(Math.min(44 * s, (W * 0.9) / 13)) + "px Arial";
 
     t = 0;
@@ -172,19 +160,6 @@ function init() {
       ctx.beginPath();
       ctx.arc(dx, y + fh + len, step * 0.28, 0, Math.PI * 2);
       ctx.fill();
-    }
-  }
-
-  // Посыпка на верхнем коржике
-  function drawSprinkles(top) {
-    for (var i = 0; i < sprinkles.length; i++) {
-      var sp = sprinkles[i];
-      ctx.save();
-      ctx.translate(top.cx + sp.x, top.y + sp.dy);
-      ctx.rotate(sp.angle);
-      ctx.fillStyle = sp.color;
-      ctx.fillRect(-4 * s, -1.5 * s, 8 * s, 3 * s);
-      ctx.restore();
     }
   }
 
@@ -265,8 +240,8 @@ function init() {
 
     // Фон
     var bg = ctx.createLinearGradient(0, 0, 0, H);
-    bg.addColorStop(0, "#ffe6f0");
-    bg.addColorStop(1, "#fff7fb");
+    bg.addColorStop(0, "#000000");
+    bg.addColorStop(1, "#000000");
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, W, H);
 
@@ -280,8 +255,6 @@ function init() {
     for (var j = 0; j < pieces.length; j++) {
       if (t >= pieces[j].delay) drawLayer(pieces[j]);
     }
-    var topPiece = pieces[pieces.length - 1];
-    if (t >= topPiece.delay) drawSprinkles(topPiece);
 
     for (var k = 0; k < candles.length; k++) {
       drawCandle(candles[k], k);
