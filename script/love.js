@@ -39,7 +39,7 @@ function init() {
     ctx.font = "60px Arial";
     ctx.fillStyle = "lightblue";
     ctx.textAlign = "center";
-    ctx.fillText("I love you", width / 2, height / 2.2 + 400);
+    ctx.fillText("С днем рождения, Вика!", width / 2, height / 2.2 + 400);
   }
 
   function heartPosition(rad) {
